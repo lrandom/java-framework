@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+   <div class="nav-1" th:replace="~{session2/fragments :: nav(${languages})}"></div>
+
+   <div class="nav-2" th:insert="~{session2/fragments :: nav(${languages})}"></div>
+
+   <div th:replace="~{session2/fragments :: #footer}"></div>
+
+   <div th:text="${greeting}"></div>
+
+   <div th:object="${user}">
+       <div th:text="*{name}"></div>
+       <div th:text="*{address}"></div>
+   </div>
+
+   <div th:text="#{greeting}"></div>
+
+   <ul>
+       <li th:each="language : ${languages}">
+           <span th:text="${language}"></span>
+       </li>
+   </ul>
+
+   <div th:if="${true}">
+     <span>Hello. It true</span>
+   </div>
+
+   <div th:unless="${false}">
+       <span>Hello. It false</span>
+   </div>
+
+   <div th:switch="${1}">
+       <div th:case="1">It is 1</div>
+       <div th:case="2">It is 2</div>
+   </div>
+
+</body>
+</html>

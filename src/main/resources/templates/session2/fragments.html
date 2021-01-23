@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaft.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <nav th:fragment="nav(menuData)">
+        <ul>
+            <li th:each="item : ${menuData}">
+                <div th:text="${item}"></div>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <footer id="footer">
+        Copyright 2021 NIIT Ha Noi
+    </footer>
+</body>
+</html>

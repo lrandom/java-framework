@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/session2/handling-form"
+      method="post" th:object="${user}">
+    <input type="text" th:field="*{name}"/>
+    <input type="text" th:field="*{address}"/>
+    <button>Submit</button>
+</form>
+</body>
+</html>
