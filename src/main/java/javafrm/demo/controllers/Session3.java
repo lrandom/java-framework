@@ -1,15 +1,23 @@
 package javafrm.demo.controllers;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 public class Session3 {
-
+    @Value("${UPLOAD_FOLDER}")
+    String UPLOAD_FOLDER;
     @GetMapping("/session3/set-cookie")
     public String setCookie(HttpServletResponse response) {
         Cookie cookie = new Cookie("SCHOOL", "NIIT");
@@ -66,5 +74,24 @@ public class Session3 {
         String schoolName = (String)httpSession.getAttribute("SCHOOL_3");
         model.addAttribute("SCHOOL_3", schoolName);
         return "session3/get-session";
+    }
+
+    @GetMapping("/upload-file")
+    public String uploadFile(){
+        return "session3/upload-form";
+    }
+
+    @PostMapping("/do-upload-file")
+    public String doUploadFile(@RequestParam(name = "image") MultipartFile file, Model model){
+       Path path = Paths.get(UPLOAD_FOLDER+file.getOriginalFilename());
+       try {
+           byte[] bytes = file.getBytes();
+           Files.write(path, bytes);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+
+       model.addAttribute("filePath","uploads/"+file.getOriginalFilename());
+       return "session3/show-image";
     }
 }
