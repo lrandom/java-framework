@@ -25,7 +25,6 @@ public class Session2Controller {
                 "JS",
                 "CSS"
         };
-
         model.addAttribute("languages",languages);
         return "session2/demo-view";
     }
