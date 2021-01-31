@@ -5,10 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 @Controller
 public class Session3 {
@@ -56,5 +53,18 @@ public class Session3 {
         response.addCookie(cookie);
 
         return "session3/remove-cookie";
+    }
+
+    @GetMapping("/session3/set-session")
+    public String setSession(HttpSession httpSession){
+        httpSession.setAttribute("SCHOOL_3", "Aptech");
+        return "session3/set-session";
+    }
+
+    @GetMapping("/session3/get-session")
+    public String getSession(HttpSession httpSession,Model model){
+        String schoolName = (String)httpSession.getAttribute("SCHOOL_3");
+        model.addAttribute("SCHOOL_3", schoolName);
+        return "session3/get-session";
     }
 }
