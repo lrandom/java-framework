@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Phân trạng</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Password</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="item : ${lists}">
+        <td th:text="${item.getId()}"></td>
+        <td th:text="${item.getUsername()}"></td>
+        <td th:text="${item.getPassword()}"></td>
+        <td th:text="${item.getPassword()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+    <div class="pagination">
+    <span
+            th:each="pageNumber:${#numbers.sequence(1, totalPage)}"
+            th:attr="class=${activePage==pageNumber ? 'active page-item' : 'page-item'}"
+            th:if="${pageNumber>0}">
+        <a  th:href="@{/list/page(page=${pageNumber})}"
+           th:th:text="${pageNumber}"
+        ></a>
+    </span>
+    </div>
+
+<style>
+    .pagination{
+        margin-top: 20px;
+    }
+    .pagination .page-item a{
+        padding:10px;
+        background: black;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .pagination .page-item.active a{
+        background: white;
+        color: black;
+        border:1px solid black;
+    }
+</style>
+</body>
+</html>
