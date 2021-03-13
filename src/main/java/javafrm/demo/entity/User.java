@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -18,6 +19,14 @@ public class User {
 
     @Column(name="password")
     String password;
+
+    //FetchType.LAZY
+    //FetchType.EAGER
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    Profile profile;
+
+    @OneToMany(mappedBy = "user")
+    Collection<Address> addresses;
 
 
 }

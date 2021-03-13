@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div th:each="item :${orders}">
+    <div>Total: <span th:text="${item.getTotal()}"></span></div>
+    <div>Sub Total: <span th:text="${item.getSubTotal()}"></span></div>
+
+    <div>Danh sách sản phẩm</div>
+    <ul>
+        <li th:each="product: ${item.getProducts()}">
+            <div th:text="${product.getName()}"></div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
